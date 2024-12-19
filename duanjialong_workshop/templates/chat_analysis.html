@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>龙王的文件工坊</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<header class="header">
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/longtu.png') }}" alt="LOGO">
+    </div>
+    <h1 class="title">龙王的文件工坊</h1>
+    <div class="account">账号</div>
+</header>
+<div class="main-container">
+    <aside class="sidebar" id="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        <div class="sidebar-header">
+            <h3>侧边栏标题</h3>
+        </div>
+        <nav class="sidebar-menu">
+            <ul>
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#services">服务</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <p>© 2024 版权所有</p>
+        </div>
+    </aside>
+    <main class="main-content">
+        <h2>中心内容区域</h2>
+        <p>这里是主要内容，侧边栏可以折叠/展开。</p>
+    </main>
+</div>

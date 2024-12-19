@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 分析</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .upload-section, .results-section {
+            margin-bottom: 20px;
+        }
+        .ai-button, .result-button {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .ai-button:disabled, .result-button:disabled {
+            background-color: #ccc;
+        }
+        .status {
+            margin-top: 10px;
+        }
+        .results-section pre {
+            background-color: #f8f8f8;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            display: none; /* 初始隐藏 */
+        }
+        .preview-box {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI 分析</h1>
+        <div class="upload-section">
+            <label for="file-input">
+                <input type="file" id="file-input" onchange="uploadFile()"> 上传文件
+            </label>
+            <p id="upload-status" class="file-types">段龙王，小女现在只支持.pdf文件哦( ´▽｀)</p>
+            <button class="ai-button" onclick="analyzeFile()">点我 AI 分析</button>
+        </div>
+        <iframe id="file-preview" class="preview-box" frameborder="0"></iframe>
+        <div class="results-section" id="analysis-results">
+            <button class="result-button" onclick="toggleResult('summary')">显示摘要</button>
+            <pre id="summary"></pre>
+            <button class="result-button" onclick="toggleResult('methodology')">显示研究方法</button>
+            <pre id="methodology"></pre>
+            <button class="result-button" onclick="toggleResult('conclusion')">显示结论</button>
+            <pre id="conclusion"></pre>
+            <button class="result-button" onclick="toggleResult('recommendations')">显示相关论文推荐</button>
+            <pre id="recommendations"></pre>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2024 龙王的文件工坊 | 保留所有权利</p>
+            <nav class="footer-links">
+                <a href="#about">关于我们</a>
+                <a href="#terms">服务条款</a>
+                <a href="#privacy">隐私政策</a>
+            </nav>
+        </div>
+    </footer>
+    <script>
+        let uploadedFile = null;
+
+        function uploadFile() {
+            const fileInput = document.getElementById("file-input");
+            const status = document.getElementById("upload-status");
+            const preview = document.getElementById("file-preview");
+
+            if (fileInput.files.length > 0) {
+                uploadedFile = fileInput.files[0]; // 保存文件对象
+                status.textContent = "恭喜龙王，上传成功啦！";
+                status.style.color = "green";
+
+                // 显示文件预览
+                const fileURL = URL.createObjectURL(uploadedFile);
+                preview.src = fileURL;
+            } else {
+                status.textContent = "请选择一个文件喂给我叭o(｀ω´ )o";
+                status.style.color = "red";
+            }
+        }
+
+        function analyzeFile() {
+            if (!uploadedFile) {
+                alert("龙王得先喂我一个文件哦( ´▽｀)");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', uploadedFile);
+
+            const status = document.getElementById('upload-status');
+            const analyzeButton = document.querySelector('.ai-button');
+            analyzeButton.disabled = true; // 禁用按钮，避免重复点击
+            status.textContent = "努力分析中（使劲o(｀ω´ )o），龙王请稍等...";
+            status.style.color = "blue";
+
+            fetch('/run_analysis', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 处理分析结果
+                document.getElementById('summary').textContent = data.summary;
+                document.getElementById('methodology').textContent = data.methodology;
+                document.getElementById('conclusion').textContent = data.conclusion;
+                document.getElementById('recommendations').textContent = data.recommendations;
+                status.textContent = "分析成功啦！我的龙王！";
+                status.style.color = "green";
+                analyzeButton.disabled = false; // 启用按钮
+            })
+            .catch(error => {
+                // 处理错误
+                document.getElementById('analysis-results').innerHTML = "分析失败，请重试！";
+                status.textContent = "分析失败（Ｔ＿Ｔ），请重试！";
+                status.style.color = "red";
+                analyzeButton.disabled = false;
+            });
+        }
+
+        function toggleResult(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    line-height: 1.6;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.header-text-box {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.account {
+    background: #fff;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.main-content {
+    display: flex;
+    margin: 20px;
+    gap: 20px;
+}
+
+.sidebar {
+    width: 250px; /* 侧边栏宽度 */
+    height: 100vh; /* 全屏高度 */
+    position: fixed; /* 固定在页面左侧 */
+    top: 0;
+    left: 0;
+    background-color: #333; /* 背景色 */
+    color: #fff; /* 字体颜色 */
+    display: flex;
+    flex-direction: column; /* 垂直排列内容 */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+    z-index: 1000; /* 使侧边栏显示在最上层 */
+}
+
+.sidebar-header {
+    padding: 20px;
+    background-color: #444; /* 标题背景色 */
+    text-align: center;
+}
+
+.sidebar-menu {
+    flex: 1; /* 占据可用空间 */
+    overflow-y: auto; /* 当菜单过多时滚动 */
+}
+
+.sidebar-menu ul {
+    list-style: none; /* 去除列表符号 */
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #555; /* 每项分隔线 */
+}
+
+.sidebar-menu li a {
+    text-decoration: none; /* 去掉下划线 */
+    color: #fff;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-menu li a:hover {
+    background-color: #575757; /* 悬停时背景色 */
+}
+
+.sidebar-footer {
+    padding: 10px 20px;
+    background-color: #444; /* 页脚背景色 */
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.container-1 {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.center {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.file-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.file-types {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+#upload-status {
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.ai-button {
+    padding: 10px 20px;
+    background-color: #cce5cc;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #333;
+}
+
+.preview-box {
+    height: 600px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.right-panel {
+    flex: 1.5; /* 增宽右侧栏 */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #d3d3d3;
+    border-radius: 8px;
+}
+
+.list-item {
+    height: 50px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+    background-color: #333; /* 背景颜色 */
+    color: #fff; /* 文字颜色 */
+    text-align: center; /* 居中对齐 */
+    padding: 20px 10px; /* 内边距 */
+    font-size: 0.9em; /* 字体大小 */
+    position: relative; /* 默认静态定位 */
+    bottom: 0; /* 位于页面底部 */
+    width: 100%; /* 占满宽度 */
+}
+
+.footer-content {
+    max-width: 1200px; /* 限制页脚宽度 */
+    margin: 0 auto; /* 居中 */
+    display: flex; /* 使用 Flexbox 布局 */
+    flex-direction: column; /* 垂直排列 */
+    align-items: center; /* 居中对齐 */
+}
+
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: #ccc; /* 链接颜色 */
+    text-decoration: none; /* 去掉下划线 */
+    margin: 0 10px; /* 链接间距 */
+    font-size: 0.9em;
+}
+
+.footer-links a:hover {
+    color: #fff; /* 鼠标悬停时变白 */
+}
+
+body {
+    height: 1500px; /* 拉长页面 */
+    overflow-y: scroll;
+}
+
+body:after {
+    content: "";
+    display: block;
+    height: 100px;
+}
+
+body.scrolled-to-bottom .footer {
+    display: block; /* 滚动到底部时显示页脚 */
+}
+
+body.scrolled-to-bottom {
+    overflow-y: auto;
+}
+
+/* JS动态页脚显示逻辑 */
